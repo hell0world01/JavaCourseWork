@@ -24,11 +24,15 @@ public class StudentGUI {
          //PANEL SECTION START
          JPanel panel1 = new JPanel();
          JPanel panel2 = new JPanel();
+         JPanel panel2_1 = new JPanel();
+         JPanel panel2_2 = new JPanel();
          JPanel panel3 = new JPanel();
          JPanel panel4 = new JPanel();
          JPanel panel5 = new JPanel();
          panel1.setBackground(new Color(123,50,250));
          panel2.setBackground(Color.lightGray);
+         panel2_1.setBackground(new Color(100,50,50));
+         panel2_1.setOpaque(true);
          panel3.setBackground(Color.magenta);
          panel4.setBackground(Color.yellow);
          panel5.setBackground(Color.pink);
@@ -84,8 +88,10 @@ public class StudentGUI {
          String months[] = {"Select Months", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
          String days[]= {"Days", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24",
                  "25", "26", "27", "29", "30", "31", "32"};
+
+
          //COMBOBOX section START
-         //For Date Of Birht (DOB)
+         //For Date Of Birth (DOB)
          JComboBox dateOfBirthCB = new JComboBox<>(DOB_array);
          JComboBox comboBoxMonths_DOB = new JComboBox<>(months);
          JComboBox comboBoxDays_DOB = new JComboBox<>(days);
@@ -252,42 +258,44 @@ public class StudentGUI {
          gbc.gridx = 0;
          gbc.gridy = 0;
          gbc.gridwidth = 1;
-         panel2.add(heading2,gbc);
+         panel2.add(panel2_1.add(heading2),gbc);
 
          gbc.gridx = 0;
          gbc.gridy = 1;
          gbc.gridwidth = 1;
-         panel2.add(numberOfModules,gbc);
+         panel2.add(panel2_1.add(numberOfModules),gbc);
 
          gbc.gridx = 1;
          gbc.gridy = 1;
          gbc.gridwidth = 2;
-         panel2.add(numberOfModulesTf,gbc);
+         gbc.weightx = 2;
+         panel2.add(panel2_1.add(numberOfModulesTf),gbc);
 
          gbc.gridx = 0;
          gbc.gridy = 2;
          gbc.gridwidth = 1;
-         panel2.add(numberOfCreditHours,gbc);
+         panel2.add(panel2_1.add(numberOfCreditHours),gbc);
 
          gbc.gridx = 1;
          gbc.gridy = 2;
          gbc.gridwidth = 2;
-         panel2.add(numberOfCreditHoursTf,gbc);
+         gbc.weightx = 2;
+         panel2.add(panel2_1.add(numberOfCreditHoursTf),gbc);
 
          gbc.gridx = 0;
          gbc.gridy = 3;
          gbc.gridwidth = 1;
-         panel2.add(numberOfDaysPresent,gbc);
+         panel2.add(panel2_1.add(numberOfDaysPresent),gbc);
 
          gbc.gridx = 1;
          gbc.gridy = 3;
          gbc.gridwidth = 2;
-         panel2.add(numberOfDaysPresentTf,gbc);
+         panel2.add(panel2_1.add(numberOfDaysPresentTf),gbc);
 
          gbc.gridx = 1;
          gbc.gridy = 4;
          gbc.gridwidth = 2;
-         panel2.add(addRegularStudent,gbc);
+         panel2.add(panel2_1.add(addRegularStudent),gbc);
          //making the combo box editable
 //         dateOfDropOutCB.setEditable(true);
 
@@ -295,62 +303,62 @@ public class StudentGUI {
          gbc.gridx = 3;
          gbc.gridy = 0;
          gbc.gridwidth = 1;
-         panel2.add((heading3),gbc);
+         panel2.add((panel2_2.add(heading3)),gbc);
 
          gbc.gridx = 3;
          gbc.gridy = 1;
          gbc.gridwidth = 1;
-         panel2.add((numberOfRemainingModules),gbc);
+         panel2.add((panel2_2.add(numberOfRemainingModules)),gbc);
 
          gbc.gridx = 4;
          gbc.gridy = 1;
          gbc.gridwidth = 2;
-         panel2.add((numberOfRemainingModulesTf),gbc);
+         panel2.add((panel2_2.add(numberOfRemainingModulesTf)),gbc);
 
          gbc.gridx = 3;
          gbc.gridy = 2;
          gbc.gridwidth = 1;
-         panel2.add((numberOfMonthsAttended),gbc);
+         panel2.add((panel2_2.add(numberOfMonthsAttended)),gbc);
 
          gbc.gridx = 4;
          gbc.gridy = 2;
          gbc.gridwidth = 2;
-         panel2.add((numberOfMonthsAttendedTf),gbc);
+         panel2.add(panel2_2.add(numberOfMonthsAttendedTf),gbc);
 
          gbc.gridx = 3;
          gbc.gridy = 3;
          gbc.gridwidth = 1;
-         panel2.add((dateOfDropOut),gbc);
+         panel2.add(panel2_2.add(dateOfDropOut),gbc);
 
          gbc.gridx = 4;
          gbc.gridy = 3;
          gbc.gridwidth = 1;
-         panel2.add((dateOfDropOutCB),gbc);
+         panel2.add(panel2_2.add(dateOfDropOutCB),gbc);
 
          gbc.gridx = 5;
          gbc.gridy = 3;
          gbc.gridwidth = 1;
-         panel2.add(comboBoxMonths_DOD,gbc);
+         panel2.add(panel2_2.add(comboBoxMonths_DOD),gbc);
 
          gbc.gridx = 6;
          gbc.gridy = 3;
          gbc.gridwidth = 1;
-         panel2.add(comboBoxDays_DOD,gbc);
+         panel2.add(panel2_2.add(comboBoxDays_DOD),gbc);
 
          gbc.gridx = 3;
          gbc.gridy = 4;
          gbc.gridwidth = 1;
-         panel2.add((remainingAmount),gbc);
+         panel2.add(panel2_2.add(remainingAmount),gbc);
 
          gbc.gridx = 4;
          gbc.gridy = 4;
          gbc.gridwidth = 2;
-         panel2.add((remainingAmountTf),gbc);
+         panel2.add(panel2_2.add(remainingAmountTf),gbc);
 
          gbc.gridx = 4;
          gbc.gridy = 5;
          gbc.gridwidth = 2;
-         panel2.add(addDropOutStudent,gbc);
+         panel2.add(panel2_2.add(addDropOutStudent),gbc);
          //PANEL (panel2) END
 
          //ADD REGULAR STUDENT BUTTON ACTIONLISTENER
