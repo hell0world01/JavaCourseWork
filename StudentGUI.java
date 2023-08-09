@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class StudentGUI {
     ArrayList<Student> studentData = new ArrayList<>();
+    JFrame frame = null;
      public void student(){
          //FRAME SECTION START
          JFrame frame = new JFrame();
@@ -20,6 +21,9 @@ public class StudentGUI {
          JButton addRegularStudent = new JButton("Add1");
          addRegularStudent.setFocusable(false);
          JButton addDropOutStudent = new JButton("Add2");
+         JButton btnClearRegular = new JButton("Clear");
+         JButton btnClearDropOut = new JButton("Clear");
+         JButton btnClearStudent = new JButton("Clear");
 
          //PANEL SECTION START
          JPanel panel1 = new JPanel();
@@ -34,12 +38,9 @@ public class StudentGUI {
          panel5.setBackground(Color.pink);
          //PANEL SECTION END
 
-
          //GIVING MARGIN
-         Border margin = new EmptyBorder(10,60,10,30);
-         Border marginForPanel = new EmptyBorder(100,0,45,0);
-
-
+         Border margin = new EmptyBorder(10,60,10,30);      //margin for label and textfield
+         Border marginForPanel = new EmptyBorder(50,0,45,0);
          //INSIDE PANEL (panel1) START
 //         JLabel simpleTXT = new JLabel("Must Enter Student Details");
          JLabel heading1 = new JLabel("Student Form");
@@ -118,7 +119,7 @@ public class StudentGUI {
          gbc.gridx = 0;
          gbc.gridy = 0;
          gbc.gridwidth = 1;
-         gbc.fill = GridBagConstraints.HORIZONTAL;
+//         gbc.fill = GridBagConstraints.HORIZONTAL;
          panel1.add(heading1,gbc);
 
          gbc.gridx = 0;
@@ -210,6 +211,11 @@ public class StudentGUI {
          gbc.gridy = 7;
          gbc.gridwidth = 1;
          panel1.add(comboBoxDays_DOE,gbc);
+
+         gbc.gridx = 1;
+         gbc.gridy = 8;
+         gbc.gridwidth = 1;
+         panel1.add(btnClearStudent,gbc);
          //INSIDE PANEL (panel) END
 
          //INSIDE PANEL (panel2) START
@@ -288,6 +294,11 @@ public class StudentGUI {
          gbc.gridy = 4;
          gbc.gridwidth = 2;
          panel2.add(addRegularStudent,gbc);
+
+         gbc.gridx = 1;
+         gbc.gridy = 5;
+         gbc.gridwidth = 2;
+         panel2.add(btnClearRegular,gbc);
          //making the combo box editable
 //         dateOfDropOutCB.setEditable(true);
 
@@ -351,25 +362,167 @@ public class StudentGUI {
          gbc.gridy = 5;
          gbc.gridwidth = 2;
          panel2.add(addDropOutStudent,gbc);
+
+         gbc.gridx = 4;
+         gbc.gridy = 6;
+         gbc.gridwidth = 2;
+         panel2.add(btnClearDropOut,gbc);
          //PANEL (panel2) END
 
          //ADD REGULAR STUDENT BUTTON ACTIONLISTENER
          //by replacing getAction with getEditor don't know why but the below code is working.
-//         addRegularStudent.addActionListener(new ActionListener() {
-//             @Override
-//             public void actionPerformed(ActionEvent e) {
-//                 if (enrollmentIDTf.getText().toString().equals(0) || courseDurationTf.getText().toString().equals(0) || studentNameTf.getText().equals("") ||
-//                 dateOfBirthCB.getEditor().equals("") || dateOfBirthCB.getEditor().equals("") || courseDurationTf.getText().toString().equals(0) || tuitionFeeTf.getText().toString().equals(0)){
-//                     JOptionPane.showMessageDialog(null,"Please fill up the form properly","Something is left",JOptionPane.INFORMATION_MESSAGE);
-//                 }
-//                 else {
-//                     studentData.add(new Regular(Integer.parseInt(enrollmentIDTf.getText()),dateOfBirthCB.getSelectedItem(),courseNameTf.getText(),studentName.getText(),dateOfEnrollmentCB.getSelectedItem(),courseDurationTf.getText(),tuitionFeeTf.getText(),numberOfModulesTf.getText(),numberOfCreditHours.getText(),numberOfDaysPresentTf.getText()));
-//                     JOptionPane.showMessageDialog(null,"Information added","Added",JOptionPane.INFORMATION_MESSAGE);
-//                 }
-//             }
-//         });
+         addDropOutStudent.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 // Get the text from the text fields
+                 String studentIdText = enrollmentIDTf.getText();
+                 String studentName = studentNameTf.getText();
+                 String courseName = courseNameTf.getText();
+                 String courseDurationText = courseDurationTf.getText();
+                 String tuitionFeeText = tuitionFeeTf.getText();
+                 String numOfRemainingModulesText = numberOfRemainingModulesTf.getText();
+                 String numOfMonthsAttendedText = numberOfMonthsAttendedTf.getText();
+
+                 // Convert text to appropriate data types
+                 int enrollmentID = Integer.parseInt(studentIdText);
+                 int courseDuration = Integer.parseInt(courseDurationText);
+                 int tuitionFee = Integer.parseInt(tuitionFeeText);
+                 int numOfRemainingModules = Integer.parseInt(numOfRemainingModulesText);
+                 int numOfMonthsAttended = Integer.parseInt(numOfMonthsAttendedText);
+
+                 // Get the selected data from the combo boxes
+                 String dropoutDate = dateOfDropOutCB.getSelectedItem() + " "
+                         + comboBoxMonths_DOD.getSelectedItem() + " "
+                         + comboBoxDays_DOD.getSelectedItem();
+
+                 String birthDate = dateOfBirthCB.getSelectedItem() + " "
+                         + comboBoxMonths_DOD.getSelectedItem() + " "
+                         + comboBoxDays_DOD.getSelectedItem();
+
+                 System.out.println(birthDate);
+
+                 // Create the Dropout object using the retrieved data
+                 DropOut dropout = new DropOut(
+                         enrollmentID,
+                         birthDate,
+                         courseName,
+                         studentName,
+                         dropoutDate,
+                         courseDuration,
+                         tuitionFee,
+                         numOfRemainingModules,
+                         numOfMonthsAttended,
+                         dropoutDate
+                 );
+                 studentData.add(dropout);
+
+                 // Perform some action with the Dropout object (for example, save it to a database)
+                 System.out.println("New Dropout object created:");
+//                System.out.println(dropout);
+
+                 for (Student student: studentData
+                 ) {
+                     System.out.println("User --");
+                     System.out.println(student.getStudentName());
+                     System.out.println(student.getDateOfBirth());
+                 }
+             }
+         });
+
+         addRegularStudent.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 if (enrollmentIDTf.getText().equals("") || courseDurationTf.getText().equals("") || studentNameTf.getText().equals("")
+                         || dateOfBirthCB.getSelectedIndex() == 0 ||comboBoxMonths_DOB.getSelectedIndex() == 0 || comboBoxDays_DOB.getSelectedIndex() == 0
+                         || dateOfEnrollmentCB.getSelectedIndex() == 0 || comboBoxMonths_DOE.getSelectedIndex() == 0 || comboBoxDays_DOE.getSelectedIndex() == 0 || courseDurationTf.getText().equals("") || tuitionFeeTf.getText().equals("")){
+                     JOptionPane.showMessageDialog(null,"Please fill up the form properly","Something is left",JOptionPane.INFORMATION_MESSAGE);
+                 }
+                 else {
+                     String studentIdText = enrollmentIDTf.getText();
+                     String studentName = studentNameTf.getText();
+                     String courseName = courseNameTf.getText();
+                     String courseDurationText = courseDurationTf.getText();
+                     String tuitionFeeText = tuitionFeeTf.getText();
+                     String numOfModulesText = numberOfModulesTf.getText();
+                     String numOfCreditHoursText = numberOfCreditHoursTf.getText();
+
+                     int enrollmentID = Integer.parseInt(studentIdText);
+                     int courseDuration = Integer.parseInt(courseDurationText);
+                     int tuitionFee = Integer.parseInt(tuitionFeeText);
+                     int numOfModules = Integer.parseInt(numOfModulesText);
+                     int numOfCreditHours = Integer.parseInt(numOfCreditHoursText);
+                     int daysPresent = Integer.parseInt(numberOfDaysPresentTf.getText());
+
+                     // Get's the selected data from the combo boxes
+                     String enrollmentDate = dateOfEnrollmentCB.getSelectedItem() + " "
+                             + comboBoxMonths_DOE.getSelectedItem() + " "
+                             + comboBoxDays_DOE.getSelectedItem();
+
+                     String birthDate = dateOfBirthCB.getSelectedItem() + " "
+                             + comboBoxMonths_DOB.getSelectedItem() + " "
+                             + comboBoxDays_DOB.getSelectedItem();
 
 
+                     Regular regular = new Regular(
+                             enrollmentID,
+                             birthDate,
+                             courseName,
+                             studentName,
+                             enrollmentDate,
+                             courseDuration,
+                             tuitionFee,
+                             numOfModules,
+                             numOfCreditHours,
+                             daysPresent
+                     );
+
+                     studentData.add(regular); // (Student) regular
+                     System.out.println("Success");
+                 }
+             }
+         });
+
+
+
+         btnClearStudent.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 studentNameTf.setText("");
+                 enrollmentIDTf.setText("");
+                 courseNameTf.setText("");
+                 courseDurationTf.setText("");
+                 tuitionFeeTf.setText("");
+                 dateOfBirthCB.setSelectedIndex(0);
+                 comboBoxMonths_DOB.setSelectedIndex(0);
+                 comboBoxDays_DOB.setSelectedIndex(0);
+                 dateOfEnrollmentCB.setSelectedIndex(0);
+                 comboBoxMonths_DOE.setSelectedIndex(0);
+                 comboBoxDays_DOE.setSelectedIndex(0);
+             }
+         });
+
+         btnClearRegular.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 numberOfModulesTf.setText("");
+                 numberOfCreditHoursTf.setText("");
+                 numberOfDaysPresentTf.setText("");
+             }
+         });
+
+         btnClearDropOut.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                 numberOfRemainingModulesTf.setText("");
+                 numberOfMonthsAttendedTf.setText("");
+                 dateOfDropOutCB.setSelectedIndex(0);
+                 comboBoxMonths_DOD.setSelectedIndex(0);
+                 comboBoxDays_DOD.setSelectedIndex(0);
+                 remainingAmountTf.setText("");
+             }
+         });
+
+         panel1.setBorder(marginForPanel);
          panel2.setBorder(marginForPanel);
 
 //         panel1.add(comboBoxDays);
@@ -386,6 +539,9 @@ public class StudentGUI {
          frame.setVisible(true);
          //ADDING COMPONENT IN FRAME END
      }
+//     void display(){
+//         JOptionPane.showMessageDialog(frame,);
+//     }
 
     public static void main(String[] args) {
          StudentGUI student1 = new StudentGUI();
